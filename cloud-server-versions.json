@@ -15,7 +15,7 @@
     "enterprise-cloud": "api-15.5.1"
   },
   "user-testing-deployment": {
-    "enterprise-cloud": "user-testing-15.4.0"
+    "enterprise-cloud": "user-testing-15.3.1"
   },
   "web-deployment": {
     "enterprise-cloud": "web-15.5.1"
