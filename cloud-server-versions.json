@@ -1,0 +1,26 @@
+{
+  "dependencies": [
+    "apne2",
+    "aps1",
+    "usw2",
+    "euc1"
+  ],
+  "analytics-api-deployment": {
+    "analytics-enterprise": "api-1.0.1"
+  },
+  "analytics-web-deployment": {
+    "analytics-enterprise": "web-1.0.1"
+  },
+  "api-statefulset": {
+    "enterprise-cloud": "api-15.5.1"
+  },
+  "user-testing-deployment": {
+    "enterprise-cloud": "user-testing-15.3.1"
+  },
+  "web-deployment": {
+    "enterprise-cloud": "web-15.5.1"
+  },
+  "nginx-deployment": {
+    "nginx": "1.26.3-alpine"
+  }
+}
