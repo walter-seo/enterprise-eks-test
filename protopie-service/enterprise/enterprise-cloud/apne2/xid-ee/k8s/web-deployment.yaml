@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enterprise-cloud-web
+  namespace: xid-ee
+spec:
+  selector:
+    matchLabels:
+      app: ent-cloud-web
+  template:
+    metadata:
+      labels:
+        app: ent-cloud-web
+    spec:
+      nodeSelector:
+        company: xid-ee
+      containers:
+        - name: ent-cloud-web
+          image: 794161565898.dkr.ecr.ap-northeast-2.amazonaws.com/enterprise-cloud:web-15.8.1
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "64Mi"
+            limits:
+              cpu: "0.5"
+              memory: "2Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ent-cloud-web-svc
+  namespace: xid-ee
+spec:
+  selector:
+    app: ent-cloud-web
+  type: NodePort
+  ports:
+    - name: api
+      port: 3000
+      targetPort: 3000
