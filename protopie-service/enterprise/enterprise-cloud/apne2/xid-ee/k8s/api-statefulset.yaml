@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: enterprise-cloud-api
+  namespace: xid-ee
+spec:
+  serviceName: "ent-cloud-api-svc"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ent-cloud-api
+  template:
+    metadata:
+      labels:
+        app: ent-cloud-api
+    spec:
+      nodeSelector:
+        company: xid-ee
+      containers:
+        - name: ent-cloud-api
+          image: 794161565898.dkr.ecr.ap-northeast-2.amazonaws.com/enterprise-cloud:api-15.8.1
+          env:
+            - name: DB_HOST
+              value: "db"
+            - name: DB_PORT
+              value: "5432"
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: 27abf957caff24df4e6c
+            - name: DB_DATABASE
+              value: proteam
+            - name: DB_READ_USER
+              value: proteam_r
+            - name: DB_WRITE_USER
+              value: proteam_w
+            - name: DB_READ_PASSWORD
+              value: 32211d1c4b7ae0a71431
+            - name: DB_WRITE_PASSWORD
+              value: c1dafa65d0ea98462a5b
+            - name: PP_MIN_STUDIO_VERSION
+              value: 7.9.0
+            - name: PP_SALT
+              value: "HEKq:7:(iS47"
+          ports:
+            - containerPort: 3333
+          volumeMounts:
+            - name: logs
+              mountPath: /app/logs
+            - name: upload
+              mountPath: /app/upload
+            - name: download
+              mountPath: /app/download
+            - name: default
+              mountPath: /app/default
+            - name: config
+              mountPath: /app/resources
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "64Mi"
+            limits:
+              cpu: "1"
+              memory: "8Gi"
+      volumes:
+        - name: logs
+          hostPath:
+            path: /home/ec2-user/logs
+            type: DirectoryOrCreate
+        - name: download
+          hostPath:
+            path: /home/ec2-user/download
+            type: DirectoryOrCreate
+        - name: default
+          hostPath:
+            path: /home/ec2-user/default
+            type: DirectoryOrCreate
+        - name: config
+          projected:
+            sources:
+              - configMap:
+                  name: config
+              - configMap:
+                  name: license
+  volumeClaimTemplates:
+    - metadata:
+        name: upload
+        namespace: xid-ee
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 30Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ent-cloud-api-svc
+  namespace: xid-ee
+spec:
+  selector:
+    app: ent-cloud-api
+  type: NodePort
+  ports:
+    - name: api
+      port: 3333
+      targetPort: 3333
