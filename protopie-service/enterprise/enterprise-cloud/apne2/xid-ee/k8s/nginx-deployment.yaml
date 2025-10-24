@@ -198,7 +198,7 @@ spec:
         company: xid-ee
       containers:
         - name: nginx
-          image: 794161565898.dkr.ecr.ap-northeast-2.amazonaws.com/nginx:1.26.3-alpine
+          image: 794161565898.dkr.ecr.ap-northeast-2.amazonaws.com/nginx:1.29.2-alpine
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
