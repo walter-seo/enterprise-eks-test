@@ -6,19 +6,19 @@
     "euc1"
   ],
   "analytics-api-deployment": {
-    "analytics-enterprise": "api-1.0.1"
+    "analytics-enterprise": "api-1.0.2"
   },
   "analytics-web-deployment": {
-    "analytics-enterprise": "web-1.0.1"
+    "analytics-enterprise": "web-1.0.2"
   },
   "api-statefulset": {
-    "enterprise-cloud": "api-15.5.1"
+    "enterprise-cloud": "api-15.8.1"
   },
   "user-testing-deployment": {
     "enterprise-cloud": "user-testing-15.4.0"
   },
   "web-deployment": {
-    "enterprise-cloud": "web-15.5.1"
+    "enterprise-cloud": "web-15.8.1"
   },
   "nginx-deployment": {
     "nginx": "1.26.3-alpine"
