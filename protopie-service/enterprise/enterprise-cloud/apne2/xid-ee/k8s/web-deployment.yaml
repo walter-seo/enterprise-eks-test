@@ -16,7 +16,7 @@ spec:
         company: xid-ee
       containers:
         - name: ent-cloud-web
-          image: 794161565898.dkr.ecr.ap-northeast-2.amazonaws.com/enterprise-cloud:web-15.8.1
+          image: 794161565898.dkr.ecr.ap-northeast-2.amazonaws.com/enterprise-cloud:web-15.8.0
           ports:
             - containerPort: 3000
           resources:
